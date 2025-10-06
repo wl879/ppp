@@ -1,20 +1,23 @@
 {
   "manifest_version": 3,
   "name": "Ppp",
-  "description": "Play play play! Global speed up the playback of videos, and live stream videos can be automatically skipped.",
-  "version": "1.1",
+  "description": "__MSG_manifest_app_description__",
+  "version": "1.3.0",
+  "default_locale": "en",
   "icons": {
-    "16": "icon-32.png",
-    "32": "icon-32.png",
-    "48": "icon-48.png",
-    "128": "icon-128.png"
+    "16": "icons/icon-32.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
   },
   "permissions": [
     "activeTab",
-    "storage"
+    "storage",
+    "scripting"
   ],
+  "host_permissions": ["<all_urls>"],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "src/popup.html"
   },
   "content_scripts": [
     {
@@ -22,7 +25,7 @@
         "<all_urls>"
       ],
       "js": [
-        "inject.js"
+        "src/ppp-content.js"
       ],
       "run_at": "document_start",
       "all_frames": true,
@@ -30,6 +33,6 @@
     }
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "src/background.js"
   }
 }

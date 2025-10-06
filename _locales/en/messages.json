@@ -1,0 +1,17 @@
+{
+    "manifest_app_description": {
+        "message": "Play * 3! Play video acceleration, automatically recognize live streams, balance volume."
+    },
+    "popup_global_speed": {
+        "message": "Global Speed: "
+    },
+    "popup_speed": {
+        "message": "Speed: "
+    },
+    "popup_loudness_eq": {
+        "message": "Loudness EQ"
+    },
+    "popup_loudness_eq_desc": {
+        "message": "When the average video volume is less than the threshold, the interstitial volume is automatically increased."
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "manifest_app_description": {
+        "message": "Play * 3! 播放视频加速, 自动识别直播, 平衡音量."
+    },
+    "popup_global_speed": {
+        "message": "通用加速: "
+    },
+    "popup_speed": {
+        "message": "加速: "
+    },
+    "popup_loudness_eq": {
+        "message": "响度平衡"
+    },
+    "popup_loudness_eq_desc": {
+        "message": "当视频平均音量小于阈值时,自动增大间量"
+    }
+}

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<style>
+		.group_block {
+			box-sizing: border-box;
+			text-align: left;
+			user-select: none;
+			background-color: #2d2d2d;
+			border-radius: 10px;
+			margin: 10px;
+			padding: 10px;
+		}
+
+		.solt_block {
+			box-sizing: border-box;
+			background-color: #1a1a1a;
+			border-radius: 10px;
+			padding: 10px;
+			margin-top: 10px;
+		}
+
+		.block_topbar {
+			box-sizing: border-box;
+			display: flex;
+			align-items: center;
+			font-size: 14px;
+		}
+
+		.flex_block {
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+		}
+
+		.btn {
+			font-size: 16px;
+			cursor: pointer;
+			position: relative;
+			cursor: pointer;
+			width: 1em;
+			height: 1em;
+		}
+
+		.btn::after,
+		.btn::before {
+			content: '';
+			position: absolute;
+		}
+
+		.stop_btn {
+			border-radius: 0.5em;
+			box-sizing: border-box;
+			border: 0.16em solid #fff;
+			position: relative;
+		}
+
+		.stop_btn::after {
+			width: 0.16em;
+			height: 0.8em;
+			top: -0.07em;
+			left: 0.28em;
+			transform: rotate(45deg);
+			background-color: #fff;
+		}
+
+		.stop_btn.on {
+			border-color: #dd4646;
+		}
+
+		.stop_btn.on::after {
+			background-color: #dd4646;
+		}
+
+		.switch_btn {
+			width: 1.8em;
+			border-radius: 0.5em;
+			background-color: #aaa;
+		}
+
+		.switch_btn::after {
+			width: 0.7em;
+			height: 0.7em;
+			border-radius: 0.35em;
+			background-color: #eee;
+			box-sizing: border-box;
+			top: 0.15em;
+			left: 0.15em;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+			transition: all 0.3s ease-in-out;
+		}
+
+		.switch_btn.on {
+			background-color: #2196F3;
+		}
+
+		.switch_btn.on::after {
+			left: auto;
+			right: 0.15em;
+		}
+
+		.reduce_btn:hover::after,
+		.add_btn:hover::after,
+		.add_btn:hover::before {
+			background: #2196F3;
+		}
+
+		.reduce_btn::after {
+			width: 0.8em;
+			height: 0.1em;
+			top: 0.45em;
+			left: 0.1em;
+			background: #fff;
+		}
+
+		.add_btn::after {
+			width: 0.8em;
+			height: 0.1em;
+			top: 0.45em;
+			left: 0.1em;
+			background: #fff;
+		}
+
+		.add_btn::before {
+			width: 0.1em;
+			height: 0.8em;
+			top: 0.1em;
+			left: 0.45em;
+			background: #fff;
+
+		}
+
+
+
+		#domain_span {
+			background-size: 14px 14px;
+			background-repeat: no-repeat;
+			background-position: 0 center;
+			flex: 1;
+			color: #b7b7b7;
+			overflow:hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			text-indent: 24px;
+		}
+
+		.speed_range_bar {
+			padding: 10px 0 0;
+		}
+
+		.speed_range_input {
+			display: block;
+			box-sizing: border-box;
+			padding: 0;
+			margin: 0;
+			width: 100%;
+		}
+
+		.speed_number_bar {
+			display: flex;
+			height: 10px;
+			width: 100%;
+			padding-top: 10px;
+			color: #aaa;
+			font-size: 12px;
+			text-align: left;
+		}
+
+		.speed_number_bar>div>span {
+			cursor: pointer;
+			position: relative;
+		}
+
+		.speed_number_bar>div>span:hover {
+			color: #fff;
+		}
+
+		.speed_number_bar>div>span::after {
+			content: '';
+			height: 3px;
+			position: absolute;
+			top: -4px;
+			left: 3px;
+			border-left: 1px solid #aaa;
+		}
+
+		.volume_waveform_grid {
+			position: absolute;
+			left: -20px;
+			height: 1px;
+			width: 100%;
+			line-height: 1px;
+			color: #666;
+			font-size: 10px;
+		}
+
+		.volume_waveform_grid::after {
+			content: "";
+			position: absolute;
+			left: 20px;
+			width: 100%;
+			height: 0;
+			border-top: 1px dashed #999999;
+		}
+
+		.volume_loudness_line {
+			position: absolute;
+			width: 100%;
+			height: 2px;
+		}
+
+		.slider_btn {
+			position: absolute;
+			
+			width: 36px;
+			height: 20px;
+			background: #2196F3;
+			border-radius: 6px;
+
+			color:#fff;
+			font-size:10px;
+			text-align:center;
+			line-height:20px;
+
+			right: -40px;
+			top: -10px;
+		}
+
+		.slider_btn::after {
+			top: 7px;
+			left: -6px;
+			border-width: 3px;
+			border-style: solid;
+			border-color: transparent;
+		}
+
+		.red_bg {
+			background: #f00;
+		}
+		.red_bg::after {
+			border-right-color: #f00;
+		}
+
+		.blue_bg {
+			background: #2196F3;
+		}
+		.blue_bg::after {
+			border-right-color: #2196F3;
+		}
+
+		/* -------------------------------- */
+
+		#global_group.hide {
+			display: none;
+		}
+
+		#domain_group.stop>* {
+			display: none;
+		}
+
+		#domain_group.stop>*:first-child {
+			display: flex;
+		}
+
+		#domain_EQ_solt #domain_volume_range {
+			display: none
+		}
+
+		#domain_EQ_solt.enable #domain_volume_range {
+			display: flex;
+		}
+	</style>
+</head>
+
+<body style="margin:0; padding:0; font-family: Arial, sans-serif; background-color: #3c3c3c; width: 320px;">
+
+	<div id="domain_group" class="group_block">
+
+		<div class="block_topbar" style="margin-bottom:16px;">
+			<div id="domain_span" style="font-size: 16px;"></div>
+			<div id="domain_stop_btn" class="btn stop_btn"></div>
+		</div>
+
+		<div id="domain_speed_solt" class="solt_block">
+			<div class="block_topbar">
+				<div style="flex: 1;">
+					<span id="popup_speed" style="color: #fff;">加速: </span><span id="domain_speed_span"
+						style="font-weight: bold;color: #2196F3;">1x</span>
+				</div>
+				<div id="domain_enable_btn" class="btn switch_btn"></div>
+			</div>
+		</div>
+
+		<div id="domain_EQ_solt" class="solt_block">
+			<div class="block_topbar">
+				<div style="flex: 1;">
+					<span id="popup_loudness_eq" style="color: #fff;">响度平衡</span><span style="font-weight: bold;color: #2196F3;"></span>
+				</div>
+				<div id="domain_EQ_enable_btn" class="btn switch_btn"></div>
+			</div>
+			<div id="domain_volume_range" class="flex_block" style="height:80px; margin:16px 0;">
+				<div style="width:20px"></div>
+				<div style="flex: 1; position:relative;height: 100%; background:#b7b7b7; border-radius:4px;">
+					<canvas id="volume_waveform_canvas" style="width:100%; height:100%; top:0; left:0;"></canvas>
+					<div style="position:absolute;width:100%;height: 100%;top:0; left:0;">
+						<div class="volume_waveform_grid" style="top:10%;">0.9</div>
+						<div class="volume_waveform_grid" style="top:50%;">0.5</div>
+						<div class="volume_waveform_grid" style="bottom:10%;">0.1</div>
+						<div id="volume_loudness_min_line" class="volume_loudness_line blue_bg" style="bottom: 20%;">
+							<div id="volume_loudness_min_slider_btn" class="btn slider_btn blue_bg">Min</div>
+						</div>
+						<div id="volume_loudness_max_line" class="volume_loudness_line red_bg" style="bottom: 80%;">
+							<div id="volume_loudness_max_slider_btn" class="btn slider_btn red_bg">Max</div>
+						</div>
+					</div>
+				</div>
+				<div style="width:40px;">
+				</div>
+			</div>
+			<div id="popup_loudness_eq_desc" style="color: #999;margin-top:6px;">当视频平均音量小于阈值时,自动增大间量.</div>
+		</div>
+	</div>
+
+	<div id="global_group" class="group_block">
+		<div class="block_topbar">
+			<div style="flex: 1;">
+				<span id="popup_global_speed" style="color: #fff;">通用加速: </span><span id="global_speed_span" style="font-weight: bold;color: #2196F3;">1x</span>
+			</div>
+			<div id="global_enable_btn" class="btn switch_btn"></div>
+		</div>
+		<div id="global_speed_solt">
+		</div>
+	</div>
+
+	<script src="popup.js"></script>
+</body>
+
+</html>
